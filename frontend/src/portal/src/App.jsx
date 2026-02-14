@@ -82,7 +82,7 @@ import Applicants from "./assets/component/Admin/Applicants";
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,   // 👈 Layout yaha
+    element: <div/>,   // 👈 Layout yaha
     children: [
       { index: true, element: <Home /> },
       { path: "login", element: <Login /> },
