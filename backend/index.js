@@ -28,6 +28,12 @@ app.use("/api/v1/user", router);
 app.use("/api/v1/company", companyRouter);
 app.use("/api/v1/job", jobRouter); 
 app.use("/api/v1/application", applicationRouter);
+ 
+app.get("/", (req, res) => {
+  res.send("Welcome to the Job Portal API");
+}
+);
+
 // Example: http://localhost:8000/api/v1/user/register
 
 app.listen(PORT, () => {
