@@ -4,7 +4,7 @@ import HeroSection from "./HeroSection";
 const CategoryCarousel = lazy(()=> import("./CategoryCarousel"));
 const LatestJobs = lazy(()=>import("./LatestJobs"));
  const Footer = lazy(()=> import("./Footer"));
-import useGetAllJobs from "./../../hooks/UseGetAllJobs";
+import useGetAllJobs from "./../../hooks/useGetAllJobs";
 
 //import React, {useEffect } from "react";
 import { useSelector } from "react-redux";
