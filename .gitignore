@@ -1,0 +1,4 @@
+node_modules/
+frontend/src/portal/node_modules/
+dist/
+.env
