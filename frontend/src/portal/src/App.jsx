@@ -99,5 +99,13 @@ const appRouter = createBrowserRouter([
       { path: "admin/jobs/:jobId/applicants", element: <Applicants /> },
     ],
   },
+
 ]);
+ const App = () => {
+   return (
+     <div>
+       <RouterProvider router={appRouter} />
+     </div>
+   );
+ };
 export default App;
