@@ -12,7 +12,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "@/redux/authSlice";
+import { setUser } from "@/redux/AuthSlice";
 
 const EditProfileDialog = ({ open, setOpen }) => {
   const dispatch = useDispatch();
