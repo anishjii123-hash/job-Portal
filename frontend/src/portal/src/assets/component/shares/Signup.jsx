@@ -91,6 +91,7 @@ const Signup = () => {
           <input
             type="text"
             name="fullName"
+              autoComplete="username"
             value={input.fullName}
             onChange={changeEventHandler}
             placeholder="Anish Kumar Sharma"
@@ -101,6 +102,7 @@ const Signup = () => {
           <input
             type="email"
             name="email"
+            autoComplete="email"
             value={input.email}
             onChange={changeEventHandler}
             placeholder="anish@gmail.com"
@@ -121,6 +123,8 @@ const Signup = () => {
           <input
             type="password"
             name="password"
+              autoComplete="new-password"
+
             value={input.password}
             onChange={changeEventHandler}
             placeholder="******"
