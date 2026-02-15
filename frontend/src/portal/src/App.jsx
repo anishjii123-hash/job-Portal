@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Navbar from "./assets/component/shares/Navbar";
 
 import Login from "./assets/component/shares/Login";
@@ -14,6 +14,7 @@ import CompanySetUp from "./assets/component/Admin/CompanySetUp";
 import AdminJobs from "./assets/component/Admin/AdminJobs";
 import PostJob from "./assets/component/Admin/PostJob";
 import Applicants from "./assets/component/Admin/Applicants";
+
 // const appRouter = createBrowserRouter([
 //   {
 //     path: "/",
@@ -78,11 +79,19 @@ import Applicants from "./assets/component/Admin/Applicants";
 // };
 
 // export default App;
+const Layout = () => {
+  return (
+    <div>
+      <Navbar />
+      <Outlet/>
+    </div>
+  )
+}
 
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <div/>,   // 👈 Layout yaha
+    element: <Layout/>,  
     children: [
       { index: true, element: <Home /> },
       { path: "login", element: <Login /> },
