@@ -10,6 +10,8 @@ import applicationRouter from "./routes/application.router.js";
 
 dotenv.config();
 
+//console.log(process.env.MONGO_URL);
+
 const app = express();
 
 app.use(express.json());
