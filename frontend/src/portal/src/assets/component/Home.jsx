@@ -1,4 +1,4 @@
-import Navbar from "./shares/Navbar";
+
 import React, { useEffect, lazy, Suspense } from "react";
 import HeroSection from "./HeroSection";
 const CategoryCarousel = lazy(()=> import("./CategoryCarousel"));
@@ -22,7 +22,7 @@ const Home = () => {
   }, []);
   return (
     <div>
-      <Navbar />
+      
       <HeroSection />
       <Suspense fallback={<p className="text-center mt-4">Loading content...</p>}>
       <CategoryCarousel />
