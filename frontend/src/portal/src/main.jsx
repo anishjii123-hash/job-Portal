@@ -13,13 +13,13 @@ const persistor = persistStore(store)
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor} >
+   {/* <PersistGate loading={null} persistor={persistor} > */}
         <StrictMode>
       <App />
       <Toaster position="top-center" richColors />
     </StrictMode>
 
-    </PersistGate>
+    {/*</PersistGate> */}
   
   </Provider>
 );
