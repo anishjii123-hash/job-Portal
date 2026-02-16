@@ -42,7 +42,7 @@ const Brower = () => {
             {allJobs.map((job, index) => {
               return (
                 <Suspense fallback={<p>Loading job...</p>}>
-                  <Job key={job._id} job={job} />
+                  <Job key={index} job={job} />
                 </Suspense>
               );
             })}

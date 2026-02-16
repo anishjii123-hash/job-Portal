@@ -38,7 +38,7 @@ app.get("/", (req, res) => {
 
 // Example: http://localhost:8000/api/v1/user/register
 
-app.listen(PORT, () => {
+
   connectDB();
-  console.log(`✅ Server is running on port http://localhost:${PORT}`);
-});
+  
+
