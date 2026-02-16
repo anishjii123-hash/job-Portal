@@ -30,7 +30,7 @@ const Profile = () => {
 
   return (
     <div>
-      <Navbar />
+    
 
       <div className="max-w-4xl mx-auto bg-white border rounded-2xl my-5 p-8">
         {/* TOP SECTION */}
