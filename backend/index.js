@@ -20,7 +20,7 @@ app.use(cookieParser());
 const corsOptions = {
   origin: ["http://localhost:5173", "https://job-portal-full-stack-project.netlify.app"],
   credentials: true,
-};
+};  
 
 app.use(cors(corsOptions));
 

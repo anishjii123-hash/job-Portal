@@ -74,7 +74,7 @@ const Login = () => {
 
           {/* Email */}
           <div className="my-2">
-            <label>Email</label>
+            <label htmlFor="email">Email</label>
             <input
               type="email"
               name="email"
@@ -89,7 +89,7 @@ const Login = () => {
 
           {/* Password */}
           <div className="my-2">
-            <label>Password</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
               name="password"
@@ -105,7 +105,7 @@ const Login = () => {
 
           {/* Role */}
           <div className="my-3">
-            <label className="mr-4">
+            <label htmlFor="role" className="mr-4">
               <input
                 type="radio"
                 name="role"
@@ -116,7 +116,7 @@ const Login = () => {
               Recruiter
             </label>
 
-            <label className="ml-4">
+            <label htmlFor="student" className="ml-4">
               <input
                 type="radio"
                 name="role"

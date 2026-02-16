@@ -134,7 +134,7 @@ const Signup = () => {
           {/* Role */}
           <div className="my-3">
             {["recruiter", "student"].map((role) => (
-              <label key={role} className="mr-4">
+              <label key={role} htmlFor={role} className="mr-4">
                 <input
                   type="radio"
                   name="role"
