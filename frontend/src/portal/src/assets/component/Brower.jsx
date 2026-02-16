@@ -1,6 +1,6 @@
 
 import React, { Suspense, lazy, useEffect } from "react";
-const Navbar = lazy(() =>import( "./shares/Navbar"));
+//const Navbar = lazy(() =>import( "./shares/Navbar"));
 const Job = lazy(() => import("./Job"));
 import { useSelector } from "react-redux";
 import { setSearchQuery } from "@/redux/jobsSlice";
@@ -25,9 +25,9 @@ const Brower = () => {
 
   return (
     <div>
-      <Suspense fallback={<p>Loading job...</p>}>
+      {/* <Suspense fallback={<p>Loading job...</p>}>
         <Navbar />
-      </Suspense>
+      </Suspense> */}
 
       <motion.div
         initial={{ opacity: 0, x: 60 }}

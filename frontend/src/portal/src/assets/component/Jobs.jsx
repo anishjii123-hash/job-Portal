@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useMemo, lazy, useState } from "react";
 import { useSelector } from "react-redux";
-import Navbar from "./shares/Navbar";
+//import Navbar from "./shares/Navbar";
 import useGetAllJobs from "@/hooks/useGetAllJobs";
 import { motion } from "framer-motion";
 
@@ -35,7 +35,7 @@ const Jobs = () => {
 
   return (
     <div>
-      <Navbar />
+      
 
       <div className="max-w-7xl mx-auto mt-5">
         <div className="flex gap-5">

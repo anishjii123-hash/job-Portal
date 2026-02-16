@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbar from "./shares/Navbar";
+//import Navbar from "./shares/Navbar";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "../ui/button";
 import { Pen, Mail, Phone } from "lucide-react";
@@ -20,7 +20,7 @@ const Profile = () => {
   if (!user) {
     return (
       <>
-        <Navbar />
+    
         <div className="text-center mt-20 text-xl font-semibold">
           Please login to view your profile
         </div>
