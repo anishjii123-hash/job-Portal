@@ -10,7 +10,7 @@ import { setLoading } from "../../../redux/AuthSlice";
 import { motion } from "framer-motion";
 
 // ✅ Lazy Navbar (optional but good)
-const Navbar = lazy(() => import("./Navbar"));
+//const Navbar = lazy(() => import("./Navbar"));
 
 const Signup = () => {
   const [input, setInput] = useState({
@@ -69,9 +69,7 @@ const Signup = () => {
 
   return (
     <div>
-         <Suspense fallback={null}>
-        <Navbar />
-      </Suspense>
+      
           <motion.div
                          initial={{ opacity: 0, x: 60 }}
                          animate={{ opacity: 1, x: 0 }}

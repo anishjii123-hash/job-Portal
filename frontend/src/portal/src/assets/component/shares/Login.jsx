@@ -2,7 +2,7 @@
 
 
 import React, { useState, useCallback } from "react";
-import Navbar from "./Navbar";
+//import Navbar from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
@@ -58,7 +58,7 @@ const Login = () => {
 
   return (
     <div>
-      <Navbar />
+  
         <motion.div
                          initial={{ opacity: 0, x: 60 }}
                          animate={{ opacity: 1, x: 0 }}
