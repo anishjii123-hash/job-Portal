@@ -91,6 +91,7 @@ const Signup = () => {
           <input
             type="text"
             name="fullName"
+              id="fullName"
               autoComplete="username"
             value={input.fullName}
             onChange={changeEventHandler}
@@ -102,6 +103,7 @@ const Signup = () => {
           <input
             type="email"
             name="email"
+              id="email"
             autoComplete="email"
             value={input.email}
             onChange={changeEventHandler}
@@ -113,6 +115,8 @@ const Signup = () => {
           <input
             type="number"
             name="phoneNumber"
+              id="phoneNumber"
+              autoComplete="tel"
             value={input.phoneNumber}
             onChange={changeEventHandler}
             placeholder="9650XXXXXX"
@@ -123,6 +127,7 @@ const Signup = () => {
           <input
             type="password"
             name="password"
+              id="password"
               autoComplete="new-password"
 
             value={input.password}
@@ -138,6 +143,7 @@ const Signup = () => {
                 <input
                   type="radio"
                   name="role"
+                  id={role}
                   value={role}
                   checked={input.role === role}
                   onChange={changeEventHandler}

@@ -78,6 +78,7 @@ const Login = () => {
             <input
               type="email"
               name="email"
+              id="email"
                 autoComplete="email"
               value={input.email}
               onChange={changeEventHandler}
@@ -93,6 +94,7 @@ const Login = () => {
             <input
               type="password"
               name="password"
+              id="password"
               autoComplete="current-password"
 
               value={input.password}
@@ -109,6 +111,7 @@ const Login = () => {
               <input
                 type="radio"
                 name="role"
+                id="recruiter"
                 value="recruiter"
                 checked={input.role === "recruiter"}
                 onChange={changeEventHandler}
@@ -120,6 +123,7 @@ const Login = () => {
               <input
                 type="radio"
                 name="role"
+                id="student"
                 value="student"
                 checked={input.role === "student"}
                 onChange={changeEventHandler}

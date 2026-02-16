@@ -100,18 +100,31 @@ export const LoginUser = async (req, res) => {
       profile: user.profile,
     };
 
+    // return res
+    //   .status(200)
+    //   .cookie("token", token, {
+    //     maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
+    //     httpOnly: true,
+    //     sameSite: "strict",
+    //   })
+    //   .json({
+    //     message: `Welcome back ${user.fullName}`,
+    //     user: userData,  
+    //     success: true,
+    //   });
     return res
-      .status(200)
-      .cookie("token", token, {
-        maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
-        httpOnly: true,
-        sameSite: "strict",
-      })
-      .json({
-        message: `Welcome back ${user.fullName}`,
-        user: userData,  
-        success: true,
-      });
+  .status(200)
+  .cookie("token", token, {
+    maxAge: 1 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+    secure: true,        // MUST in production
+    sameSite: "none",    // MUST for cross-origin
+  })
+  .json({
+    message: `Welcome back ${user.fullName}`,
+    user: userData,
+    success: true,
+  });
   } catch (error) {
     console.log(" Login error:", error);
     return res.status(500).json({
@@ -121,18 +134,37 @@ export const LoginUser = async (req, res) => {
   }
 };
  export const LogOutUser =async(req,res)=>{
-    try{
-        return res.status(200).cookie("token","",{maxAge:0}).json({
-            message:"Logged out successfully",
-            success:true
-        })
-    }catch(error){
-        return res.status(500).json({
-            message:"Internal server error",
-            success:false
-        })
-    }       
- }
+     try{
+//         return res.status(200).cookie("token","",{maxAge:0}).json({
+//             message:"Logged out successfully",
+//             success:true
+//         })
+//     }catch(error){
+//         return res.status(500).json({
+//             message:"Internal server error",
+//             success:false
+//         })
+//     }       
+//  }
+ return res
+ 
+      .status(200)
+      .clearCookie("token", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      })
+      .json({
+        message: "Logged out successfully",
+        success: true,
+      });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Internal server error",
+      success: false,
+    });
+  }
+};
 
 export const updateProfile = async (req, res) => {
   try {

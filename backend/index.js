@@ -18,10 +18,14 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: ["http://localhost:5173", "https://job-portal-full-stack-project.netlify.app"],
+  origin:["https://job-portal-lac-five.vercel.app",
+    "https://job-portal-full-stack-project.netlify.app",
+    "http://localhost:5173"
+  ],
+ // origin: "https://job-portal-full-stack-project.netlify.app",
   credentials: true,
 };  
-
+//"http://localhost:5173", 
 app.use(cors(corsOptions));
 
 const PORT = process.env.PORT || 3000;
