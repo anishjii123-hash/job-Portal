@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: ["http://localhost:5173","http://anish-jobportal.netlify.app"], 
+  origin: ["http://localhost:5173","https://anish-jobportal.netlify.app"], 
   credentials: true,
 };
 
