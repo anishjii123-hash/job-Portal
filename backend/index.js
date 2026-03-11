@@ -11,6 +11,7 @@ import applicationRouter from "./routes/application.router.js";
 dotenv.config();
 
 const app = express();
+  connectDB();
 
 app.use(express.json());
 app.use(cookieParser());
@@ -22,7 +23,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-const PORT = process.env.PORT || 3000;
+//const PORT = process.env.PORT || 3000;
 
 app.use("/api/v1/user", router); 
 app.use("/api/v1/company", companyRouter);
@@ -36,7 +37,9 @@ app.get("/", (req, res) => {
 
 // Example: http://localhost:8000/api/v1/user/register
 
-app.listen(PORT, () => {
-  connectDB();
-  console.log(`✅ Server is running on port http://localhost:${PORT}`);
-});
+//app.listen(PORT, () => {
+ // connectDB();
+  //console.log(`✅ Server is running on port http://localhost:${PORT}`);
+//});
+
+export default app;   
