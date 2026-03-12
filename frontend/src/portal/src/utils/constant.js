@@ -5,3 +5,4 @@ export const COMPANY_API_END_POINT = "https://job-portal-lac-five.vercel.app/api
 
 //https://job-portal-wheat-three.vercel.app/api/v1/company
 //https://job-portal-lac-five.vercel.app/
+
