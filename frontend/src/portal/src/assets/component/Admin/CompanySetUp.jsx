@@ -142,7 +142,7 @@ import React, { useEffect, useState, lazy, Suspense, useCallback } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/assets/ui/button";
 import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/Input";
+import { Input } from "@/components/ui/input";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { COMPANY_API_END_POINT } from "@/utils/constant";
