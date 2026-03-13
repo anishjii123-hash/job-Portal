@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Navbar from "./assets/component/shares/Navbar";
+//import Navbar from "./assets/component/shares/Navbar";
 
 import Login from "./assets/component/shares/Login";
 import Signup from "./assets/component/shares/Signup";
