@@ -258,7 +258,7 @@ import { Button } from "@/assets/ui/button";
 import { toast } from "sonner";
 import axios from "axios";
 import { USER_API_END_POINT } from "@/utils/constant";
-import { setUser } from "@/redux/AuthSlice";
+import { setUser } from "@/redux/authSlice";
 
 import {
   Home,

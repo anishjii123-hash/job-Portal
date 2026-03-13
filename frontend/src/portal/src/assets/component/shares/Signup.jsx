@@ -184,7 +184,7 @@ import axios from "axios";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { toast } from "sonner";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "../../../redux/AuthSlice";
+import { setLoading } from "../../../redux/authSlice";
 
 import { motion } from "framer-motion";
 import { User, Mail, Phone, Lock, Upload } from "lucide-react";

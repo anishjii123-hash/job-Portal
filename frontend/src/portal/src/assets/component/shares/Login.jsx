@@ -315,7 +315,7 @@ import { toast } from "sonner";
 import axios from "axios";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading, setUser } from "../../../redux/AuthSlice";
+import { setLoading, setUser } from "../../../redux/authSlice";
 import { Mail, Lock } from "lucide-react";
 
 const Login = () => {
