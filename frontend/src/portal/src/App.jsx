@@ -11,7 +11,7 @@ import Description from "./assets/component/Description";
 import Companies from "./assets/component/Admin/Companies";
 import CompaniesCreate from "./assets/component/Admin/CompaniesCreate";
 import CompanySetUp from "./assets/component/Admin/CompanySetUp";
-import AdminJobs from "./assets/component/Admin/adminJobs";
+import AdminJobs from "./assets/component/Admin/AdminJobs";
 import PostJob from "./assets/component/Admin/PostJob";
 import Applicants from "./assets/component/Admin/Applicants";
 const appRouter = createBrowserRouter([
