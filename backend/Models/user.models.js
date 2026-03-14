@@ -31,7 +31,15 @@ const userSchema = new mongoose.Schema({
     resumeOriginalName: { type: String },
     companyName: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
     profilePhoto: { type: String, default: "" },
-  },
+  }, 
+   otp:{
+         type:String,
+         default:null
+    },
+    otpExpiry:{ 
+        type:Date,
+        default:null
+       }
 }, { timestamps: true });
 
 const User = mongoose.model("User", userSchema);

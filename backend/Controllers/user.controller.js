@@ -4,6 +4,8 @@ import { get } from "http";
 import jwt from "jsonwebtoken";
 import { getDataUri } from "../ulties/datauri.js";
 import cloudinary from "../ulties/cloudinary.js";
+import { sentOtp } from "../mailVerification/otpSent.js"
+
 
 export const registerUser = async (req, res) => {
   const { fullName, email, phoneNumber, password, role } = req.body;
@@ -50,6 +52,7 @@ export const registerUser = async (req, res) => {
     });
   }
 };
+
 export const LoginUser = async (req, res) => {
   const { email, password, role } = req.body;
 
@@ -121,6 +124,126 @@ export const LoginUser = async (req, res) => {
     });
   }
 };
+export const forgetPassword = async (req,res) =>{
+    try{
+
+    const {email} = req.body;
+    const user = await User.findOne({email})
+    if(!user){
+        return res.status(400).json({
+            success:false,
+            message:"User not found"
+        })
+    }
+    const otp = Math.floor(100000 + Math.random() *900000).toString();
+    const otpExpiry = new Date(Date.now() + 10*60*1000) // 10 minutes
+
+    user.otp = otp;
+    user.otpExpiry = otpExpiry;
+    await user.save();
+    // await sentOtp(email,otp)
+     await sentOtp(email,otp)
+    return res.status(200).json({
+        success:true,
+        message:"OTP sent successfully"
+    })
+
+    }catch(error){
+        return res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+
+export const verifyOtp = async (req,res) =>{
+    const {otp} = req.body;
+    const email = req.params.email;
+
+    try{
+
+        const user = await User.findOne({email})
+        if(!user){
+            return res.status(400).json({
+                success:false,
+                message:"user not defined"
+            })
+        }
+        if(!user.otp || !user.otpExpiry){
+            return res.status(400).json({
+                success:false,
+                message:"OTP not found please request for new OTP"
+            })
+        }
+        if (user.otp.toString() !== otp.toString()){
+            return res.status(400).json({
+                success:false,
+                message:"OTP does not match"
+            })
+        }
+        if(user.otpExpiry < new Date()){
+            return res.status(400).json({
+                success:false,
+                message:"OTP has expired please request for new OTP"
+            })
+        }
+        user.otp = null;
+        user.otpExpiry = null;
+        await user.save();
+        return res.status(200).json({
+            success:true,
+            message:"OTP verified successfully"
+        })
+
+    }catch(error){
+        return res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
+}
+export const changePassword = async (req,res) =>{
+    const {newPassword,comfirmPassword} = req.body;
+    const email = req.params.email;
+    
+    if(!newPassword || !comfirmPassword){
+        return res.status(400).json({
+            success:false,
+            message:"All field are required"
+        })
+    }
+    if(newPassword !== comfirmPassword){
+        return res.status(400).json({
+            success:false,
+            message:"Password does't Match Please try again"
+        })
+    }
+
+    try{
+        const user = await User.findOne({email})
+        if(!user){
+            return res.status(401).json({
+                success:false,
+                message:"User does't Exist"
+            })
+        }
+        const hashPassword = await bcrypt.hash(newPassword,10)
+         user.password = hashPassword;
+         await user.save();
+
+         return res.status(200).json({
+            success:true,
+            message:"Password successfully change"
+         })
+
+    }catch(error){
+      return res.status(500).json({
+        success:false,
+        message:"Internal server error"
+      })
+    }
+}
  export const LogOutUser =async(req,res)=>{
     try{
         return res.status(200).cookie("token","",{maxAge:0}).json({
@@ -134,70 +257,6 @@ export const LoginUser = async (req, res) => {
         })
     }       
  }
-
-// export const updateProfile = async (req, res) => {
-//   try {
-//     const { fullName,email,phoneNumber,bio,skills } = req.body;
-//     const file = req.file; // may be undefined
-
-//     let skillsArray = [];
-//     if (skills) {
-//       skillsArray = skills.split(",").map((s) => s.trim());
-//     }
-
-//     const userId = req.userId;
-//     let user = await User.findById(userId);
-
-//     if (!user) {
-//       return res.status(404).json({
-//         message: "User not found",
-//         success: false,
-//       });
-//     }
-
-//     // Ensure profile exists
-//     if (!user.profile) user.profile = {};
-
-//     // Update text fields
-//     if (fullName) user.fullName = fullName;
-//     if (email) user.email = email;
-//     if (phoneNumber) user.phoneNumber = phoneNumber;
-//     if (bio) user.profile.bio = bio;
-//     if (skills) user.profile.skills = skillsArray;
-
-//     // ✅ FILE UPLOAD SAFE HANDLING
-//     if (file) {
-//       const fileUri = getDataUri(file);
-//       const cloudRespond = await cloudinary.uploader.upload(
-//         fileUri.content
-//       );
-
-//       user.profile.resume = cloudRespond.secure_url;
-//       user.profile.resumeOriginalName = file.originalname;
-//     }
-
-//     await user.save();
-
-//     return res.status(200).json({
-//       message: "Profile updated successfully",
-//       success: true,
-//       user: {
-//         _id: user._id,
-//         fullName: user.fullName,
-//         email: user.email,
-//         phoneNumber: user.phoneNumber,
-//         role: user.role,
-//         profile: user.profile,
-//       },
-//     });
-//   } catch (error) {
-//     console.log("❌ Update profile error:", error);
-//     return res.status(500).json({
-//       message: "Internal server error",
-//       success: false,
-//     });
-//   }
-// };
 
 export const updateProfile = async (req, res) => {
   try {
@@ -252,13 +311,6 @@ export const updateProfile = async (req, res) => {
   user.profile.resume = cloudRespond.secure_url;
   user.profile.resumeOriginalName = file.originalname;
 }
-// if (file) {
-    //   const fileUri = getDataUri(file);
-    //   const cloudRespond = await cloudinary.uploader.upload(fileUri.content);
-
-    //   user.profile.resume = cloudRespond.secure_url;
-    //   user.profile.resumeOriginalName = file.originalname;
-    // }
 
     await user.save();
 

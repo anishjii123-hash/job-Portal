@@ -14,6 +14,9 @@ import CompanySetUp from "./assets/component/Admin/CompanySetUp";
 import AdminJobs from "./assets/component/Admin/AdminJobs";
 import PostJob from "./assets/component/Admin/PostJob";
 import Applicants from "./assets/component/Admin/Applicants";
+import ForgotPassword from "./assets/component/ForgetPassword";
+import VerifyOtp from "./assets/component/VerifyOtp";
+import ChangePassword from "./assets/component/ChangePassword";
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -66,6 +69,18 @@ const appRouter = createBrowserRouter([
   {
     path: "/admin/jobs/:jobId/applicants",
     element: <Applicants />,
+  },
+   {
+    path:"/forgetPassword",
+    element:<ForgotPassword/>
+  }, 
+   {
+    path:"/verifyOTP/:email",
+    element:<VerifyOtp/>
+  },
+  {
+    path:"/changePassword/:email",
+    element:<ChangePassword/>
   },
 ]);
 

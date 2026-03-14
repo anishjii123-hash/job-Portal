@@ -307,6 +307,172 @@
 
 // export default React.memo(Login);
 
+// import React, { useState, useCallback } from "react";
+// import Navbar from "./Navbar";
+// import { Link, useNavigate } from "react-router-dom";
+// import { motion } from "framer-motion";
+// import { toast } from "sonner";
+// import axios from "axios";
+// import { USER_API_END_POINT } from "@/utils/constant";
+// import { useDispatch, useSelector } from "react-redux";
+// import { setLoading, setUser } from "../../../redux/authSlice";
+// import { Mail, Lock } from "lucide-react";
+
+// const Login = () => {
+//   const [input, setInput] = useState({
+//     email: "",
+//     password: "",
+//     role: "",
+//   });
+
+//   const { loading } = useSelector((state) => state.auth);
+//   const navigate = useNavigate();
+//   const dispatch = useDispatch();
+
+//   const changeEventHandler = useCallback((e) => {
+//     const { name, value } = e.target;
+//     setInput((prev) => ({ ...prev, [name]: value }));
+//   }, []);
+
+//   const onSubmit = useCallback(
+//     async (e) => {
+//       e.preventDefault();
+//       try {
+//         dispatch(setLoading(true));
+
+//         const res = await axios.post(
+//           `${USER_API_END_POINT}/login`,
+//           input,
+//           {
+//             headers: { "Content-Type": "application/json" },
+//             withCredentials: true,
+//           }
+//         );
+
+//         if (res.data.success) {
+//           dispatch(setUser(res.data.user));
+//           toast.success(res.data.message);
+//           navigate("/");
+//         }
+//       } catch (error) {
+//         toast.error(error.response?.data?.message || "Login failed");
+//       } finally {
+//         dispatch(setLoading(false));
+//       }
+//     },
+//     [dispatch, input, navigate]
+//   );
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-b from-[#0B0016] via-[#12001F] to-[#1A0033]">
+//       <Navbar />
+//       <motion.div
+//         initial={{ opacity: 0, y: 40 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.4 }}
+//         className="flex items-center justify-center px-4"
+//       >
+//         <form
+//           onSubmit={onSubmit}
+//           className="w-full max-w-md bg-[#1A0033] border border-gray-700 rounded-2xl p-8 mt-10 shadow-2xl text-white"
+//         >
+//           <h1 className="text-3xl font-bold mb-8 text-center text-[#6A38C2]">
+//             Login
+//           </h1>
+
+//           {/* Email */}
+//           <div className="mb-6 relative">
+//             <Mail className="absolute left-4 top-4 text-gray-400 w-6 h-6" />
+//             <input
+//               type="email"
+//               name="email"
+//               value={input.email}
+//               onChange={changeEventHandler}
+//               placeholder="Email"
+//               className="w-full pl-14 pr-4 py-4 rounded-xl border border-gray-600 bg-[#12001F] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600 text-lg"
+//               required
+//             />
+//           </div>
+          
+
+//           {/* Password */}
+//           < div className="mb-6 relative">
+            
+//              <div className="grid gap-2">
+//               <div className="flex item-center justify-between">
+//                 <label htmlFor="password">Password</label>
+//                 <Link to={"/forgetPassword"} className="text-sm text-blue-700" >Forget Your Password</Link>
+//               </div>
+            
+//             <Lock className="absolute left-4 top-4 text-gray-400 w-6 h-6" />
+//             <input
+//               type="password"
+//               name="password"
+//               value={input.password}
+//               onChange={changeEventHandler}
+//               placeholder="Password"
+//               className="w-full pl-14 pr-4 py-4 rounded-xl border border-gray-600 bg-[#12001F] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600 text-lg"
+//               required
+//             />
+//           </div>
+//           </div>
+
+//           {/* Role */}
+//           <div className="flex justify-center gap-10 mb-6 text-lg">
+//             <label className="flex items-center gap-2">
+//               <input
+//                 type="radio"
+//                 name="role"
+//                 value="recruiter"
+//                 checked={input.role === "recruiter"}
+//                 onChange={changeEventHandler}
+//                 className="accent-[#6A38C2] w-5 h-5"
+//               />
+//               Recruiter
+//             </label>
+//             <label className="flex items-center gap-2">
+//               <input
+//                 type="radio"
+//                 name="role"
+//                 value="student"
+//                 checked={input.role === "student"}
+//                 onChange={changeEventHandler}
+//                 className="accent-[#6A38C2] w-5 h-5"
+//               />
+//               Student
+//             </label>
+//           </div>
+
+//           {/* Submit Button */}
+//           <button
+//             type="submit"
+//             disabled={loading}
+//             className={`w-full py-3 rounded-2xl text-white font-bold text-lg flex justify-center items-center ${
+//               loading
+//                 ? "bg-gray-500 cursor-not-allowed"
+//                 : "bg-green-700 hover:bg-green-600"
+//             }`}
+//           >
+//             {loading ? "Please wait..." : "Login"}
+//           </button>
+
+//           {/* Signup Link */}
+//           <p className="text-center mt-6 text-gray-300 text-lg">
+//             Don’t have an account?{" "}
+//             <Link
+//               to="/signup"
+//               className="text-blue-500 hover:underline font-semibold"
+//             >
+//               Sign Up
+//             </Link>
+//           </p>
+//         </form>
+//       </motion.div>
+//     </div>
+//   );
+// };
+
+// export default React.memo(Login);
 import React, { useState, useCallback } from "react";
 import Navbar from "./Navbar";
 import { Link, useNavigate } from "react-router-dom";
@@ -315,7 +481,7 @@ import { toast } from "sonner";
 import axios from "axios";
 import { USER_API_END_POINT } from "@/utils/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading, setUser } from "../../../redux/authSlice";
+import { setLoading, setUser } from "@/redux/authSlice";
 import { Mail, Lock } from "lucide-react";
 
 const Login = () => {
@@ -337,6 +503,12 @@ const Login = () => {
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
+
+      if (!input.role) {
+        toast.error("Please select role");
+        return;
+      }
+
       try {
         dispatch(setLoading(true));
 
@@ -366,6 +538,7 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0B0016] via-[#12001F] to-[#1A0033]">
       <Navbar />
+
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -383,6 +556,7 @@ const Login = () => {
           {/* Email */}
           <div className="mb-6 relative">
             <Mail className="absolute left-4 top-4 text-gray-400 w-6 h-6" />
+
             <input
               type="email"
               name="email"
@@ -395,17 +569,32 @@ const Login = () => {
           </div>
 
           {/* Password */}
-          <div className="mb-6 relative">
-            <Lock className="absolute left-4 top-4 text-gray-400 w-6 h-6" />
-            <input
-              type="password"
-              name="password"
-              value={input.password}
-              onChange={changeEventHandler}
-              placeholder="Password"
-              className="w-full pl-14 pr-4 py-4 rounded-xl border border-gray-600 bg-[#12001F] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600 text-lg"
-              required
-            />
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-2">
+              <label>Password</label>
+
+              <Link
+              to={"/forgetPassword"} 
+              
+                className="text-sm text-blue-500 hover:underline"
+              >
+                Forget Password
+              </Link>
+            </div>
+
+            <div className="relative">
+              <Lock className="absolute left-4 top-4 text-gray-400 w-6 h-6" />
+
+              <input
+                type="password"
+                name="password"
+                value={input.password}
+                onChange={changeEventHandler}
+                placeholder="Password"
+                className="w-full pl-14 pr-4 py-4 rounded-xl border border-gray-600 bg-[#12001F] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600 text-lg"
+                required
+              />
+            </div>
           </div>
 
           {/* Role */}
@@ -421,6 +610,7 @@ const Login = () => {
               />
               Recruiter
             </label>
+
             <label className="flex items-center gap-2">
               <input
                 type="radio"
@@ -447,7 +637,7 @@ const Login = () => {
             {loading ? "Please wait..." : "Login"}
           </button>
 
-          {/* Signup Link */}
+          {/* Signup */}
           <p className="text-center mt-6 text-gray-300 text-lg">
             Don’t have an account?{" "}
             <Link
