@@ -238,14 +238,28 @@ export const updateProfile = async (req, res) => {
     if (phoneNumber) user.phoneNumber = phoneNumber;
     if (bio) user.profile.bio = bio;
     if (skills) user.profile.skills = skillsArray;
-
+      
     if (file) {
-      const fileUri = getDataUri(file);
-      const cloudRespond = await cloudinary.uploader.upload(fileUri.content);
+  const fileUri = getDataUri(file);
 
-      user.profile.resume = cloudRespond.secure_url;
-      user.profile.resumeOriginalName = file.originalname;
+  const cloudRespond = await cloudinary.uploader.upload(
+    fileUri.content,
+    {
+      resource_type: "raw",
+      folder: "job_portal/resumes"
     }
+  );
+
+  user.profile.resume = cloudRespond.secure_url;
+  user.profile.resumeOriginalName = file.originalname;
+}
+    // if (file) {
+    //   const fileUri = getDataUri(file);
+    //   const cloudRespond = await cloudinary.uploader.upload(fileUri.content);
+
+    //   user.profile.resume = cloudRespond.secure_url;
+    //   user.profile.resumeOriginalName = file.originalname;
+    // }
 
     await user.save();
 
