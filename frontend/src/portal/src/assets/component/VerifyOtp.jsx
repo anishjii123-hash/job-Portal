@@ -2,7 +2,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Button } from "../ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { VERIFY_OTP_POINT } from '@/utils/constant'
+import { USER_API_END_POINT } from '@/utils/constant'
 import axios from 'axios'
 import { CheckCircle, Loader2, RotateCcw } from 'lucide-react'
 import React, { useRef, useState } from 'react'
@@ -38,7 +38,7 @@ const VerifyOtp = () => {
 
     try {
       setIsLoading(true)
-      const res = await axios.post(`${VERIFY_OTP_POINT}/${email}`, {
+      const res = await axios.post(`${USER_API_END_POINT}/verifyOtp/${email}`, {
         otp: finalOtp,
       })
       setSuccessMessage(res.data.message)

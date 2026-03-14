@@ -1,6 +1,6 @@
 import { Button } from "../ui/button";
 import { Input } from '@/components/ui/input'
-import { CHANGE_PASSWORD_POINT } from '@/utils/constant'
+import { CHANGE_PASSWORD_POINT, USER_API_END_POINT } from '@/utils/constant'
 import axios from 'axios'
 import { Loader2 } from 'lucide-react'
 import React, { useState } from 'react'
@@ -31,7 +31,7 @@ const ChangePassword = () => {
 
         try {
             setIsLoading(true)
-            const res = await axios.post(`${CHANGE_PASSWORD_POINT}/${email}`, {
+            const res = await axios.post(`${USER_API_END_POINT}/changePassword/${email}`, {
                 newPassword,
                 confirmPassword
             })

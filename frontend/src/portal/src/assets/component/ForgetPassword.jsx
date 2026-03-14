@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-import { FORGET_PASSWORD_POINT } from "@/utils/constant";
+import { FORGET_PASSWORD_POINT, USER_API_END_POINT } from "@/utils/constant";
 
 import axios from "axios";
 import { CheckCircle, Loader2 } from "lucide-react";
@@ -38,7 +38,7 @@ const ForgotPassword = () => {
     try {
       dispatch(setLoading(true));
 
-      const res = await axios.post(`${FORGET_PASSWORD_POINT}`, {
+      const res = await axios.post(`${USER_API_END_POINT}/forgetPassword`, {
         email,
       });
 
