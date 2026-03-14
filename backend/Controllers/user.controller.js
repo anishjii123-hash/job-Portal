@@ -245,15 +245,14 @@ export const updateProfile = async (req, res) => {
   const cloudRespond = await cloudinary.uploader.upload(
     fileUri.content,
     {
-      resource_type: "raw",
-      folder: "job_portal/resumes"
+      resource_type: "raw"
     }
   );
 
   user.profile.resume = cloudRespond.secure_url;
   user.profile.resumeOriginalName = file.originalname;
 }
-    // if (file) {
+// if (file) {
     //   const fileUri = getDataUri(file);
     //   const cloudRespond = await cloudinary.uploader.upload(fileUri.content);
 
