@@ -100,13 +100,6 @@ export const LoginUser = async (req, res) => {
       profile: user.profile,
     };
 
-    // return res
-    //   .status(200)
-    //   .cookie("token", token, {
-    //     maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
-    //     httpOnly: true,
-    //     sameSite: "strict",
-    //   })
     return res
   .status(200)
   .cookie("token", token, {
@@ -142,19 +135,78 @@ export const LoginUser = async (req, res) => {
     }       
  }
 
+// export const updateProfile = async (req, res) => {
+//   try {
+//     const { fullName,email,phoneNumber,bio,skills } = req.body;
+//     const file = req.file; // may be undefined
+
+//     let skillsArray = [];
+//     if (skills) {
+//       skillsArray = skills.split(",").map((s) => s.trim());
+//     }
+
+//     const userId = req.userId;
+//     let user = await User.findById(userId);
+
+//     if (!user) {
+//       return res.status(404).json({
+//         message: "User not found",
+//         success: false,
+//       });
+//     }
+
+//     // Ensure profile exists
+//     if (!user.profile) user.profile = {};
+
+//     // Update text fields
+//     if (fullName) user.fullName = fullName;
+//     if (email) user.email = email;
+//     if (phoneNumber) user.phoneNumber = phoneNumber;
+//     if (bio) user.profile.bio = bio;
+//     if (skills) user.profile.skills = skillsArray;
+
+//     // ✅ FILE UPLOAD SAFE HANDLING
+//     if (file) {
+//       const fileUri = getDataUri(file);
+//       const cloudRespond = await cloudinary.uploader.upload(
+//         fileUri.content
+//       );
+
+//       user.profile.resume = cloudRespond.secure_url;
+//       user.profile.resumeOriginalName = file.originalname;
+//     }
+
+//     await user.save();
+
+//     return res.status(200).json({
+//       message: "Profile updated successfully",
+//       success: true,
+//       user: {
+//         _id: user._id,
+//         fullName: user.fullName,
+//         email: user.email,
+//         phoneNumber: user.phoneNumber,
+//         role: user.role,
+//         profile: user.profile,
+//       },
+//     });
+//   } catch (error) {
+//     console.log("❌ Update profile error:", error);
+//     return res.status(500).json({
+//       message: "Internal server error",
+//       success: false,
+//     });
+//   }
+// };
+
 export const updateProfile = async (req, res) => {
   try {
     const { fullName, email, phoneNumber, bio, skills } = req.body;
-    const file = req.file; // may be undefined
-
-    let skillsArray = [];
-    if (skills) {
-      skillsArray = skills.split(",").map((s) => s.trim());
-    }
+    const file = req.file;
 
     const userId = req.userId;
-    let user = await User.findById(userId);
 
+    let user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({
         message: "User not found",
@@ -162,22 +214,34 @@ export const updateProfile = async (req, res) => {
       });
     }
 
-    // Ensure profile exists
+    // ✅ CHECK DUPLICATE PHONE NUMBER
+    if (phoneNumber && phoneNumber !== user.phoneNumber) {
+      const existingUser = await User.findOne({ phoneNumber });
+
+      if (existingUser) {
+        return res.status(400).json({
+          message: "Phone number already exists",
+          success: false,
+        });
+      }
+    }
+
+    let skillsArray = [];
+    if (skills) {
+      skillsArray = skills.split(",").map((s) => s.trim());
+    }
+
     if (!user.profile) user.profile = {};
 
-    // Update text fields
     if (fullName) user.fullName = fullName;
     if (email) user.email = email;
     if (phoneNumber) user.phoneNumber = phoneNumber;
     if (bio) user.profile.bio = bio;
     if (skills) user.profile.skills = skillsArray;
 
-    // ✅ FILE UPLOAD SAFE HANDLING
     if (file) {
       const fileUri = getDataUri(file);
-      const cloudRespond = await cloudinary.uploader.upload(
-        fileUri.content
-      );
+      const cloudRespond = await cloudinary.uploader.upload(fileUri.content);
 
       user.profile.resume = cloudRespond.secure_url;
       user.profile.resumeOriginalName = file.originalname;
@@ -188,15 +252,9 @@ export const updateProfile = async (req, res) => {
     return res.status(200).json({
       message: "Profile updated successfully",
       success: true,
-      user: {
-        _id: user._id,
-        fullName: user.fullName,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        role: user.role,
-        profile: user.profile,
-      },
+      user: user,
     });
+
   } catch (error) {
     console.log("❌ Update profile error:", error);
     return res.status(500).json({
@@ -205,5 +263,3 @@ export const updateProfile = async (req, res) => {
     });
   }
 };
-
-
